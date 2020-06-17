@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/vl-mobitutor/Netology_GO_Task2_2/pkg/credit"
 )
 
 func main() {
