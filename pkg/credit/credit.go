@@ -11,20 +11,20 @@ func Calculate (loanAmount int64, loanPeriod, loanPercent int) (monthlyPayment, 
 
 	//Расчет месячной процентной ставки
 	percentageMonthly = float64(loanPercent) / 12 / 100
-	percentageMonthly = math.Round(percentageMonthly*10000) / 10000 //Округление месячной ставки до 3-го знака
 
 	//Расчет коэффициента аннуитета
 	annuityRate = percentageMonthly * math.Pow((percentageMonthly + 1), float64(loanPeriod)) / (math.Pow((percentageMonthly + 1), float64(loanPeriod)) - 1)
-	annuityRate = math.Round(annuityRate * 1_000_000) / 1_000_000 //Округление коэффиента до 6 знака
 
 	//Расчет суммы ежемесячного аннуитетного платежа
 	monthlyPayment = int64(float64(loanAmount) * annuityRate)
+	monthlyPayment = int64(math.Round(float64(monthlyPayment) / 100) * 100) //Математическое округление до целых рублей
 
 	//Расчет общей выплаты по кредиту
 	totalPayment = int64(loanPeriod) * monthlyPayment
 
 	//Расчет переплаты по кредиту
 	overPayment = totalPayment - loanAmount
+
 
 	return
 }
